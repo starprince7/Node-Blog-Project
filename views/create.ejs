@@ -1,0 +1,15 @@
+<%-include('./partials/head.ejs')-%>
+
+<div class="form-centered">
+    <form action="/create" method="POST">
+        <label>Blog title</label>
+        <input type="text" name="title">
+        <label>Author</label>
+        <input type="text" name="author">
+        <label>Body</label>
+        <textarea type="text" name="body"></textarea>
+        <button>sumbit</button>
+    </form>
+</div>
+
+<%-include('./partials/footer.ejs')-%>

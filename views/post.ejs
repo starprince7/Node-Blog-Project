@@ -1,0 +1,55 @@
+<%-include('./partials/head.ejs')-%>
+
+<div id="post-id" style="float: right;"><%= post._id%></div>
+<div id="content">
+    <% if(post) { %>
+    <div class="post-container">
+        <div class="post">
+            <div class="post-author"><img class="post-circle"
+                    src="https://pbs.twimg.com/media/EaFg17BWAAAWlMQ?format=jpg&name=small">
+                <span><%= post.author%></span></div>
+            <p class="post-date">Sunday, 7th june.</p>
+            <h3 class="post-title"><%= post.title %></h3>
+            <div class="post-content">
+                <p>
+                    <%= post.body%>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="post-container">
+        <div class="second post">
+            <div class="post-author">
+                <img class="post-circle" src="https://pbs.twimg.com/media/EaFg17BWAAAWlMQ?format=jpg&name=small">
+                <ul>
+                    <% post.comments.forEach( ({_id, author, body})=> { %>
+                    <span><%= author  %> </span>
+                    <li>
+                        <p class="post-date">sun, 7th june.</p>
+                        <h3 class="post-title"><%= body %></h3>
+                        <a onclick="deleteFunc()" id="delete-btn" data-prince="<%= _id %>"><button>delete
+                                comment</button></a>
+                    </li>
+                    <% }) %>
+                </ul>
+            </div>
+            <div class="post-content">
+                <p>nothing here</p>
+                <p>text blank----------------------------------------------------------</p>
+            </div>
+            <div class="post-content">
+                <h3>Add a comment</h3>
+                <form action="/comments/<%= post._id%>" method="POST">
+                    <input type="text" name="comment">
+                    <button>Add comment!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <% } else { %>
+    <h1>Loading...</h1>
+    <% } %>
+</div>
+
+
+<%-include('./partials/footer.ejs')-%>

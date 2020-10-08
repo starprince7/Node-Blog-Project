@@ -1,0 +1,16 @@
+<%-include('./partials/head.ejs')-%>
+
+<div class="form-centered">
+    <h2>Sign up</h2>
+    <form action="/create" method="POST">
+        <label>Name / Email</label>
+        <input type="text" name="name">
+        <label>Create Username</label>
+        <input type="text" name="username">
+        <label>Password</label>
+        <input type="text" name="password">
+        <button>sumbit</button>
+    </form>
+</div>
+
+<%-include('./partials/footer.ejs')-%>

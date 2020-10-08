@@ -1,0 +1,40 @@
+<%-include('./partials/head.ejs')-%>
+
+<div id="content">
+    <div class="post-container">
+
+        <% if(blogs.length > 0) { %>
+        <% blogs.forEach( blog => { %>
+        <div class="post">
+            <div class="post-author"><img class="post-circle"
+                    src="https://pbs.twimg.com/media/EaFg17BWAAAWlMQ?format=jpg&name=small">
+                <span>Prince</span></div>
+            <p class="post-date">Sunday, 7th june.</p>
+            <a href="/posts/<%=blog._id%>">
+                <h3 class="post-title"><%= blog.title %></h3>
+            </a>
+            <div class="post-content">
+                <p></p>
+            </div>
+        </div>
+        <% }) %>
+        <% } %>
+    </div>
+    <div class="post-container">
+        <div class="second post">
+            <div class="post-author">
+                <img class="post-circle" src="https://pbs.twimg.com/media/EaFg17BWAAAWlMQ?format=jpg&name=small">
+                <span>Me again
+                    <p class="post-date">sun, 7th june.</p>
+                    <h3 class="post-title">Post Title</h3>
+            </div>
+            <div class="post-content">
+                <p>nothing here</p>
+                <p>text blank----------------------------------------------------------</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%-include('./partials/footer.ejs')-%>
