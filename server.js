@@ -3,12 +3,16 @@ const mongoose = require('mongoose')
 const Blog = require('./model/blogSchema')
 const router = require('./routes/blogroutes')
 const authRouter = require('./routes/authRoutes')
+const cookieParser = require('cookie-parser')
+const { checkUser } = require('./middlewares/auth')
 
 const app = express();
 
 //use Middleware
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
+app.use(express.json())   //This is use to parse only json data!
+app.use(cookieParser())
 
 //Register view engine
 app.set('view engine', 'ejs')
@@ -28,6 +32,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCr
 
 
 //===========Routes=================
+app.get('*', checkUser)
 app.get('/', async (req, res) => {
 
     try {

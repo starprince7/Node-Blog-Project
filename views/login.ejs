@@ -1,14 +1,35 @@
 <%-include('./partials/head.ejs')-%>
 
-<div class="login">
-    <h2>Login</h2>
-    <form action="/create" method="POST">
-        <label>Username</label>
-        <input type="text" name="username">
-        <label>Password</label>
-        <input type="text" name="password">
-        <button>sumbit</button>
-    </form>
+<div class="container form-centered">
+  <h2 class="left-align">Login</h2>
+  <div class="container">
+    <div class="valign-wrapper row">
+      <div class="col s12 m6 l6">
+        <form id="login-form">
+          <div class="row">
+            <div class="input-field">
+              <input type="text" id="email" name="email" />
+              <label for="email">Email</label>
+              <div class="email error"></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field">
+              <input type="password" id="password" name="password" />
+              <label for="password">Password</label>
+              <div class="password error"></div>
+            </div>
+          </div>
+
+          <button>sumbit</button>
+        </form>
+      </div>
+      <div class="col s6 m6 l6">
+          <img src="./img/login.png" class="responsive-img" />
+        </div>
+    </div>
+  </div>
 </div>
 
 <%-include('./partials/footer.ejs')-%>

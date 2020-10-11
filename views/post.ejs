@@ -8,41 +8,46 @@
             <div class="post-author"><img class="post-circle"
                     src="https://pbs.twimg.com/media/EaFg17BWAAAWlMQ?format=jpg&name=small">
                 <span><%= post.author%></span></div>
-            <p class="post-date">Sunday, 7th june.</p>
-            <h3 class="post-title"><%= post.title %></h3>
-            <div class="post-content">
-                <p>
-                    <%= post.body%>
-                </p>
-            </div>
+            <p style="width: 195px;" class="post-date truncate"><%= post.date %></p>
+                <div class="container">
+                    <h3 class="post-title"><%= post.title %></h3>
+                    <div class="post-content">
+                        <p>
+                            <%= post.body%>
+                        </p>
+                    </div>
+                </div>
         </div>
     </div>
     <div class="post-container">
-        <div class="second post">
-            <div class="post-author">
-                <img class="post-circle" src="https://pbs.twimg.com/media/EaFg17BWAAAWlMQ?format=jpg&name=small">
-                <ul>
-                    <% post.comments.forEach( ({_id, author, body})=> { %>
-                    <span><%= author  %> </span>
-                    <li>
-                        <p class="post-date">sun, 7th june.</p>
-                        <h3 class="post-title"><%= body %></h3>
-                        <a onclick="deleteFunc()" id="delete-btn" data-prince="<%= _id %>"><button>delete
-                                comment</button></a>
-                    </li>
-                    <% }) %>
-                </ul>
-            </div>
-            <div class="post-content">
-                <p>nothing here</p>
-                <p>text blank----------------------------------------------------------</p>
-            </div>
-            <div class="post-content">
-                <h3>Add a comment</h3>
-                <form action="/comments/<%= post._id%>" method="POST">
-                    <input type="text" name="comment">
-                    <button>Add comment!</button>
-                </form>
+        <div class="container">
+            <div class="second post">
+                
+                <h4>Comments</h4>
+                    <ul class="collection">
+                        <% post.comments.forEach( ({_id, author, body, date})=> { %>
+                        <span><%= author  %> </span>
+                        <li class="collection-item transparent avatar">
+                            <i class="material-icons circle  red lighten-2">person</i>
+                            <p style="font-size: 10px; width: 148px;" class="post-date truncate"><%= date %></p>
+                            <p class="post-title"><%= body %></p>
+                            <a onclick="deleteFunc()" id="delete-btn" class="secondary-content btn-floating btn-small grey" data-prince="<%= _id %>"><i class="small material-icons">delete</i></a>  
+                        </li>
+                        <% }) %>
+                    </ul>
+
+                <div class="post-content">
+                    <div class="divider"></div>
+                </div>
+                <div class="post-content">
+                    <form action="/comments/<%= post._id%>" method="POST">
+                        <div class="input-field">
+                            <label for="comment"><h6>Add a comment</h6></label>
+                            <input type="text" id="comment" name="comment">
+                        </div>
+                        <button>Add comment!</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

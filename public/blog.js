@@ -4,6 +4,8 @@ const toggle = () => {
     sideBar.classList.toggle('active')
 }
 
+
+
 /**================================ Ajax request to Delete Comments from posts=================== */
 const btn = document.getElementById('delete-btn');
 const postId = document.getElementById('post-id').textContent;

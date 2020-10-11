@@ -14,7 +14,7 @@ const loginSchema = new Schema({
     username: {
         type: String,
         required: [true, 'Please enter a username'],
-        unique: {required: true},
+        unique: true,
         lowercase:true
     },
     password: {
@@ -28,6 +28,29 @@ const loginSchema = new Schema({
         default: Date()
     }
 }, {timestamps: true})
+
+loginSchema.pre('save', async function(next) {
+    const salt =  await bcrypt.genSalt()
+    this.password = await bcrypt.hash(this.password, salt)
+    next()
+})
+
+loginSchema.statics.Login = async function(email, password) {
+    console.log('login details from schema', email, '&', password)
+    const user = await this.findOne({email})
+    if(user) {
+        const auth =  await bcrypt.compare(password, user.password)
+        if(auth){
+            return user
+        }
+        else {
+            throw Error('incorrect password')
+        }
+    }
+    else {
+        throw Error('incorrect email')
+    }
+}
 
 const RegisteredUsers = mongoose.model('RegisteredUsers', loginSchema)
 

@@ -1,16 +1,51 @@
 <%-include('./partials/head.ejs')-%>
 
-<div class="form-centered">
-    <h2>Sign up</h2>
-    <form action="/create" method="POST">
-        <label>Name / Email</label>
-        <input type="text" name="name">
-        <label>Create Username</label>
-        <input type="text" name="username">
-        <label>Password</label>
-        <input type="text" name="password">
-        <button>sumbit</button>
-    </form>
+<div class=" form-centered">
+  <div class="container">
+    <h2 class="letf-align">Sign up</h2>
+    <div class="card">
+    </div>
+    <div class="row">
+      <div class="card">
+        <div class="col s12 m6 l6 push-l6">
+          <img width="420" src="img/signup2.png" class="responsive-img">
+        </div>
+  
+      <div class="col s12 m6 l6 pull-l5">
+        <div class="container">
+          <form id="signup-form">
+            <div class="row">
+              <div class="input-field">
+                <input type="text" id="email" name="email" />
+                <label for="email">Email</label>
+                <div class="email error"></div>
+              </div>
+            </div>
+          
+            <div class="row">
+              <div class="input-field">
+                <input type="text" id="username" name="username" />
+                <label for="username">Create Username</label>
+                <div class="username error"></div>
+              </div>
+            </div>
+          
+            <div class="row">
+              <div class="input-field">
+                <input type="password" id="password" name="password" />
+                <label for="password">Password</label>
+                <div class="password error"></div>
+              </div>
+            </div>
+          
+            <button>sumbit</button>
+          </form>
+        </div>
+      </div>
+      </div>
+    </div>
+    </div>
+  </div>
 </div>
 
 <%-include('./partials/footer.ejs')-%>
