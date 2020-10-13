@@ -20,24 +20,22 @@
             <% if(blogs.length > 0) { %>
             <% blogs.forEach( blog => { %>
 
-                    <div class="col s12 m6 l6">
+                    <div class="col s12 m6 l8">
                         <div class="card">
                             <div class="card-img">
-                                <img src="img/node-js.jpg" class="responsive-img">
+                                <img src="<%= blog.image %>"  class="responsive-img">
                             </div>
                             <div class="card-content">
-                                <div class="post">
-                                    <div class="post-author"><img class="post-circle"
-                                            src="https://pbs.twimg.com/media/EaFg17BWAAAWlMQ?format=jpg&name=small">
-                                        <span>Prince</span></div>
-                                    <p class="post-date truncate"><%= blog.date %></p>
+                                
+
+                                    <p  style="width: 155px;"  class="post-date truncate"><%= blog.date %></p>
                                     <a href="/posts/<%=blog._id%>" class=" title  teal-text accent-3">
-                                        <h6 class="post-title"><%= blog.title %></h6>
+                                        <h5 class="post-title"><%= blog.title %></h5>
                                     </a>
                                     <div class="post-content">
-                                        <p></p>
+                                        <p class="truncate"> <%= blog.body %> </p>
                                     </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -48,7 +46,8 @@
     </div>
     <div class="post-container">
         <div class="container">
-            <h4>events...</h4>
+            <br>
+            <h4>Up comming events...</h4>
             <div class="row valign-wrapper">
                 <div class="col s3 m3 l3">
                     <div class="card">

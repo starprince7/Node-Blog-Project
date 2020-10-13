@@ -5,7 +5,13 @@
 <div class="container">
   <h3>write a blog post</h3>
   <div class="container">
-    <form action="/create" method="POST">
+    <form action="/create" method="POST" enctype="multipart/form-data">
+      <div class="row">
+        <div class="input-field">
+          <h6>Add an Image</h6>
+          <input type="file" id="file" name="file" />
+        </div>
+      </div>
       <div class="row">
         <div class="input-field">
           <input type="text" id="title" name="title" />
@@ -26,9 +32,22 @@
           <textarea type="text" id="body" name="body"></textarea>
         </div>
       </div>
+
+      <div class="row">
+        <div class="input-field">
+          <label for="link">Url / links</label>
+          <input type="url" name="link" value="https://" id="link">
+        </div>
+      </div>
       <button>sumbit</button>
     </form>
   </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <%-include('./partials/footer.ejs')-%>

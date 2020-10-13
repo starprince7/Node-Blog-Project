@@ -10,6 +10,7 @@ const app = express();
 
 //use Middleware
 app.use(express.static('public'))
+app.use('/upload/', express.static('upload'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())   //This is use to parse only json data!
 app.use(cookieParser())
@@ -17,13 +18,15 @@ app.use(cookieParser())
 //Register view engine
 app.set('view engine', 'ejs')
 
+// port 
+const port = process.env.PORT || 4000
 // db connection 
 const dbURI = 'mongodb+srv://starprince:starprince7@starprince.m9v4i.mongodb.net/Projects?retryWrites=true&w=majority'
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, autoIndex: true })
     .then(result => {
         console.log('Connected to the Database!...')
         app.listen(4000, () => {
-            console.log('Server is live on port 4000')
+            console.log(`Server is live on port ${port}`)
         })
     })
     .catch(err => {

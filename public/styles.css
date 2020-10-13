@@ -162,13 +162,17 @@ a:hover{
     width: 50px;
     vertical-align: middle;
 }
-.post-author span{
+.post-date span{
     margin-left: 16px;
-}.post-date{
+}.post-author{
     color: gray;
-    font-size: 14px;
+    font-size: 15px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+}
+
+.post-body {
+    line-height: 1.8em;
 }
 
 .collection li {

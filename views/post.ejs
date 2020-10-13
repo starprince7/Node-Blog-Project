@@ -1,19 +1,28 @@
 <%-include('./partials/head.ejs')-%>
 
-<div id="post-id" style="float: right;"><%= post._id%></div>
+<div class="container">
+    <div id="post-id" style="float: right;"><%= post._id%></div>
+<br>
+    <a href="#" id="blog-delete-btn" class="btn-small waves-effect waves-dark red right">Delete post</a>
+</div>
 <div id="content">
     <% if(post) { %>
     <div class="post-container">
         <div class="post">
-            <div class="post-author"><img class="post-circle"
-                    src="https://pbs.twimg.com/media/EaFg17BWAAAWlMQ?format=jpg&name=small">
-                <span><%= post.author%></span></div>
-            <p style="width: 195px;" class="post-date truncate"><%= post.date %></p>
                 <div class="container">
+                    <div class="post-author">
+                        <p>post by, <u><%= post.author%></u></p></div>
+                    <span style="width: 130px;" class="post-date truncate"><%= post.date %></span><br>
+                    <img src="/<%= post.image %>" width="350" class="responsive-img">
                     <h3 class="post-title"><%= post.title %></h3>
                     <div class="post-content">
-                        <p>
+                        <p class="post-body flow-text">
                             <%= post.body%>
+                        </p>
+                        <br>
+                        <br>
+                        <p style="font-size: 16px;" class="post-body flow-text">
+                            <a href="<%= post.link%>"><%= post.link%></a>
                         </p>
                     </div>
                 </div>

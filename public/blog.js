@@ -6,14 +6,30 @@ const toggle = () => {
 
 
 
-/**================================ Ajax request to Delete Comments from posts=================== */
+/**================================ Ajax request to Delete Comments And POSTS=================== */
 const btn = document.getElementById('delete-btn');
 const postId = document.getElementById('post-id').textContent;
+const blog_delete = document.getElementById('blog-delete-btn')
 
-/*btn.addEventListener('click', async (e)=> {
-    alert('btn worked');
+blog_delete.addEventListener('click', async (e) => {
+    e.preventDefault;
 
-});*/
+    try {
+        const res = fetch(`/blog/${postId}`, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+            .then(data => window.location.href = data.redirect)
+    }
+    catch (error) {
+        console.log(error)
+    }
+
+})
+
+
+
+/**================================ Ajax request to Delete Comments from posts=================== */
 
 const deleteFunc = async () => {
 

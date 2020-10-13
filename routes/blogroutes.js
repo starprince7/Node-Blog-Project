@@ -1,26 +1,75 @@
 const express = require("express");
-const { findByIdAndDelete } = require("../model/blogSchema");
 const Blog = require("../model/blogSchema");
 const { requireAuth } = require("../middlewares/auth");
+const multer = require("multer");
+const path = require("path");
 
 const router = express.Router();
+
+const storage = multer.diskStorage({
+  destination: "./upload",
+  filename: function (req, file, cb) {
+    console.log(
+      "File Name is saved as",
+      new Date().toISOString() + file.originalname
+    );
+    console.log(
+      "File Name is saved as",
+      new Date().toISOString().replace(/:/g, "-") + file.originalname
+    );
+    cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1024 * 1024 * 10 },
+  fileFilter: function (req, file, cb) {
+    if (
+      file.mimetype == "image/jpeg" ||
+      file.mimetype == "image/png" ||
+      file.mimetype == "image/gif"
+    ) {
+      cb(null, true);
+    } else {
+      cb(new Error("Type not supported"));
+    }
+  },
+});
+
+// Error handling
+const handleError = (err) => {
+  let errors = {msg: 'Post not submitted failed at server check info!---->', title: "", body: "" };
+
+  if (err.message.includes("Blog validation failed:")) {
+    Object.values(err.errors).forEach(({ properties }) => {
+      errors[properties.path] = properties.message;
+    });
+  }
+
+  return errors;
+};
 
 // Route protection function or middleware! ("requireAuth")
 router.get("/create", requireAuth, (req, res) => {
   res.render("create");
 });
 
-router.post("/create", async (req, res) => {
-  const blogPost = req.body;
-  console.log(blogPost);
+router.post("/create", upload.single("file"), async (req, res) => {
+  console.log(req.file);
+  const image = req.file;
+  const { title, author, body, link } = req.body;
+  console.log('this is the link / URL from the form',link)
 
   try {
-    const blog = await Blog.create(blogPost);
+    const blog = await Blog.create({ image, title, author, body, link });
     blog
       ? res.status(200).redirect("/")
       : res.status(400).send("error creating post!");
   } catch (err) {
-    console.log(err);
+    const errors = handleError(err);
+    console.log(errors);
+    res.status(400).send(JSON.stringify(errors));
   }
 });
 
@@ -34,18 +83,16 @@ router.get("/posts/:id", async (req, res) => {
   }
 });
 
-router.get("/blog", async (req, res) => {
-  const fakeBlog = {
-    title: "fake News of rex-T",
-    author: "Prince",
-    body: "body of fake News",
-    comments: [{ author: "rex-T", body: "Its rex-T in the building!" }],
-  };
+router.delete("/blog/:id", async (req, res) => {
+  let id = req.params.id;
+
   try {
-    const blog = await Blog.create(fakeBlog);
-    res.status(200).json({ blog });
+    const blog = await Blog.findByIdAndDelete(id);
+    console.log(blog);
+    res.status(200).json({ redirect: "/" });
   } catch (err) {
     console.log(err);
+    res.status(400);
   }
 });
 

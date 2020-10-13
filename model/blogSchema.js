@@ -3,15 +3,17 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const blogSchema = new Schema({
+    image: String,
     date: {
         type: Date,
         default: Date.now,
         default: Date()
     },
-    title: String,
+    title: {type: String, required: true},
     author: String,
-    body: String,
-    comments: [{ author: String, body: String, date: { type: Date, default: Date.now } }]
+    body: {type: String, required: true},
+    link: String,
+    comments: [{ author: String, body: {type: String, required: true}, date: { type: Date, default: Date.now } }]
 }, { timestamps: true })
 
 const Blog = mongoose.model('Blog', blogSchema)
