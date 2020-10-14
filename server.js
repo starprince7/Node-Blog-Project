@@ -25,7 +25,7 @@ const dbURI = 'mongodb+srv://starprince:starprince7@starprince.m9v4i.mongodb.net
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, autoIndex: true })
     .then(result => {
         console.log('Connected to the Database!...')
-        app.listen(4000, () => {
+        app.listen(process.env.PORT, '0.0.0.0', () => {
             console.log(`Server is live on port ${port}`)
         })
     })
