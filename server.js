@@ -39,7 +39,7 @@ app.get('*', checkUser)
 app.get('/', async (req, res) => {
 
     try {
-        const blogs = await Blog.find()
+        const blogs = await Blog.find().sort({createdAt: -1})
         res.render('index', { blogs })
     }
     catch (err) {
