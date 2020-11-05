@@ -11,10 +11,6 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     console.log(
       "File Name is saved as",
-      new Date().toISOString() + file.originalname
-    );
-    console.log(
-      "File Name is saved as",
       new Date().toISOString().replace(/:/g, "-") + file.originalname
     );
     cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
@@ -23,7 +19,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 1024 * 1024 * 10 },
+  limits: { fileSize: 1024 * 1024 * 11 },
   fileFilter: function (req, file, cb) {
     if (
       file.mimetype == "image/jpeg" ||
@@ -41,7 +37,7 @@ const upload = multer({
 const handleError = (err) => {
   let errors = {msg: 'Post not submitted failed at server check info!---->', title: "", body: "" };
 
-  if (err.message.includes("Blog validation failed:")) {
+  if (err.message.includes("Blog validation failed")) {
     Object.values(err.errors).forEach(({ properties }) => {
       errors[properties.path] = properties.message;
     });
@@ -57,12 +53,12 @@ router.get("/create", requireAuth, (req, res) => {
 
 router.post("/create", upload.single("file"), async (req, res) => {
   console.log(req.file);
-  const image = req.file;
+  const image = req.file.path;
   const { title, author, body, link } = req.body;
   console.log('this is the link / URL from the form',link)
 
   try {
-    const blog = await Blog.create({ image, title, author, body, link });
+    const blog = await Blog.create({ picture: image, title, author, body, link });
     blog
       ? res.status(200).redirect("/")
       : res.status(400).send("error creating post!");

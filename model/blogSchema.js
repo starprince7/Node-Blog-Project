@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const blogSchema = new Schema({
-    image: String,
+    picture: '',
     date: {
         type: Date,
         default: Date.now,
