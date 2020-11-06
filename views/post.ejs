@@ -1,69 +1,83 @@
 <%-include('./partials/head.ejs')-%>
 
 <div class="container">
-    <div id="post-id" style="float: right;"><%= post._id%></div>
-<br>
-    <a href="#" id="blog-delete-btn" class="btn-small waves-effect waves-dark red right">Delete post</a>
+  <div id="post-id" style="float: right"><%= post._id%></div>
+  <br />
+  <%if (user) {%>
+  <a
+    href="#"
+    id="blog-delete-btn"
+    class="btn-small waves-effect waves-dark red right"
+    >Delete post</a
+  >
+  <% }%>
 </div>
 <div id="content">
-    <% if(post) { %>
-    <div class="post-container">
-        <div class="post">
-                <div class="container">
-                    <div class="post-author">
-                        <p>post by, <u><%= post.author%></u></p></div>
-                    <span style="width: 130px;" class="post-date truncate"><%= post.date %></span><br>
-                    <img src="/<%= post.picture %>" width="350" class="responsive-img">
-                    <h3 class="post-title"><%= post.title %></h3>
-                    <div class="post-content">
-                        <p class="post-body flow-text">
-                            <%= post.body%>
-                        </p>
-                        <br>
-                        <br>
-                        <p style="font-size: 16px;" class="post-body flow-text">
-                            <a href="<%= post.link%>"><%= post.link%></a>
-                        </p>
-                    </div>
-                </div>
+  <% if(post) { %>
+  <div class="post-container">
+    <div class="post">
+      <div class="container">
+        <div class="post-author">
+          <p>post by, <u><%= post.author%></u></p>
         </div>
+        <span style="width: 130px" class="post-date truncate"
+          ><%= post.date %></span
+        ><br />
+        <img src="/<%= post.picture %>" width="350" class="responsive-img" />
+        <h3 class="post-title"><%= post.title %></h3>
+        <div class="post-content">
+          <p class="post-body flow-text"><%= post.body%></p>
+          <br />
+          <br />
+          <p style="font-size: 16px" class="post-body flow-text">
+            <a href="<%= post.link%>"><%= post.link%></a>
+          </p>
+        </div>
+      </div>
     </div>
-    <div class="post-container">
-        <div class="container">
-            <div class="second post">
-                
-                <h4>Comments</h4>
-                    <ul class="collection">
-                        <% post.comments.forEach( ({_id, author, body, date})=> { %>
-                        <span><%= author  %> </span>
-                        <li class="collection-item transparent avatar">
-                            <i class="material-icons circle  red lighten-2">person</i>
-                            <p style="font-size: 10px; width: 148px;" class="post-date truncate"><%= date %></p>
-                            <p class="post-title"><%= body %></p>
-                            <a onclick="deleteFunc()" id="delete-btn" class="secondary-content btn-floating btn-small grey" data-prince="<%= _id %>"><i class="small material-icons">delete</i></a>  
-                        </li>
-                        <% }) %>
-                    </ul>
+  </div>
+  <div class="post-container">
+    <div class="container">
+      <div class="second post">
+        <h4>Comments</h4>
+        <ul class="collection">
+          <% post.comments.forEach( ({_id, author, body, date})=> { %>
+          <span><%= author %> </span>
+          <li class="collection-item transparent avatar">
+            <i class="material-icons circle red lighten-2">person</i>
+            <p style="font-size: 10px; width: 148px" class="post-date truncate">
+              <%= date %>
+            </p>
+            <p class="post-title"><%= body %></p>
+            <a
+              onclick="deleteFunc()"
+              id="delete-btn"
+              class="secondary-content btn-floating btn-small grey"
+              data-prince="<%= _id %>"
+              ><i class="small material-icons">delete</i></a
+            >
+          </li>
+          <% }) %>
+        </ul>
 
-                <div class="post-content">
-                    <div class="divider"></div>
-                </div>
-                <div class="post-content">
-                    <form action="/comments/<%= post._id%>" method="POST">
-                        <div class="input-field">
-                            <label for="comment"><h6>Add a comment</h6></label>
-                            <input type="text" id="comment" name="comment">
-                        </div>
-                        <button>Add comment!</button>
-                    </form>
-                </div>
+        <div class="post-content">
+          <div class="divider"></div>
+        </div>
+        <div class="post-content">
+          <form action="/comments/<%= post._id%>" method="POST">
+            <div class="input-field">
+              <label for="comment"><h6>Add a comment</h6></label>
+              <input type="text" id="comment" name="comment" />
             </div>
+            <button>Add comment!</button>
+          </form>
         </div>
+      </div>
     </div>
-    <% } else { %>
-    <h1>Loading...</h1>
-    <% } %>
+  </div>
+  <% } else { %>
+  <h1>Loading...</h1>
+  <% } %>
 </div>
-
 
 <%-include('./partials/footer.ejs')-%>

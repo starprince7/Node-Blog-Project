@@ -4,9 +4,11 @@ const form = document.getElementById('signup-form')
 const emailError = document.querySelector('.email.error')
 const usernameError = document.querySelector('.username.error')
 const passwordError = document.querySelector('.password.error')
+const loader2 = document.querySelector('.display-loader__two')
 
 form.addEventListener('submit', async (e)=> {
     e.preventDefault();
+    loader2.style.display = 'block'
 
     // reset All error fields
     emailError.textContent = ''
@@ -25,16 +27,18 @@ form.addEventListener('submit', async (e)=> {
         })
         
         const data = await result.json();
-        console.log(data.refinedError)
-        console.log(data)
-        if(data.refinedError) {
+        /* console.log(data.refinedError)
+        console.log(data) */
+        if (data.refinedError) {
+            loader2.style.display = 'none'
             // set email & password errors
             emailError.textContent = data.refinedError.email
             usernameError.textContent = data.refinedError.username
             passwordError.textContent = data.refinedError.password
         }
 
-        if(data.user) {
+        if (data.user) {
+            loader2.style.display = 'none'
             location.assign('/create')
         }
     }

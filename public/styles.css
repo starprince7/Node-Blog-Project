@@ -167,7 +167,7 @@ a:hover{
 }.post-author{
     color: gray;
     font-size: 15px;
-    text-transform: uppercase;
+    text-transform: capitalize;
     letter-spacing: 0.1em;
 }
 
@@ -247,6 +247,7 @@ button {
     border: none;
     border-radius: 10px;
     margin: 15px 0;
+    cursor: pointer;
 }
 
 .error {
@@ -255,4 +256,55 @@ button {
     color: red;
     margin-bottom: 5px;
     padding: 0 10px;
+}
+
+
+/* Loader CSS HERE! */
+
+.display-loader {
+    display: none;
+}
+
+/* For Sign up! ejs */
+.display-loader__two {
+    display: none;
+}
+
+.background-loader {
+    cursor: wait;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    background: rgba(10, 10, 10, .4);
+    border-radius: 2px;
+    box-shadow: 3px px 6px silver;
+    z-index: 100;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+}
+
+/* #loader-two {
+    width: 120px;
+    height: 120px;
+    border-top: solid 10px white;
+    border-radius: 9%;
+    transform: translate(-180px, 0) rotate(90deg);
+    animation: spin .5s linear infinite reverse; 
+} */
+#loader {
+    width: 25px;
+    height: 25px;
+    border: solid 10px transparent;
+    border-left: solid 4px white;
+    border-top: solid 4px white;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+}
+@keyframes spin {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
 }
