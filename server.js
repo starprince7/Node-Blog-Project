@@ -6,8 +6,8 @@ const authRouter = require('./routes/authRoutes')
 const cookieParser = require('cookie-parser')
 const { checkUser } = require('./middlewares/auth')
 
-/* require('dotenv').config();
- */
+require('dotenv').config();
+
 const app = express();
 
 //use Middleware
@@ -23,7 +23,7 @@ app.set('view engine', 'ejs')
 // port 
 const port = process.env.PORT || 5000
 // db connection 
-const dbURI = 'mongodb+srv://starprince:starprince7@starprince.m9v4i.mongodb.net/Projects?retryWrites=true&w=majority'
+const dbURI = process.env.DB_CONNECTION
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, autoIndex: true })
     .then(result => {
         console.log('Connected to the Database!...')
