@@ -197,6 +197,11 @@ p{
     background-color: lightgray;
 }
 
+.max-width {
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
 
 /*==========styling my form========*/
 

@@ -26,12 +26,16 @@
         <img src="/<%= post.picture %>" width="350" class="responsive-img" />
         <h3 class="post-title"><%= post.title %></h3>
         <div class="post-content">
-          <p class="post-body flow-text"><%= post.body%></p>
+          <div class="post-body max-width">
+            <p class="flow-text"><%= post.body%></p>
+          </div>
           <br />
           <br />
-          <p style="font-size: 16px" class="post-body flow-text">
-            <a href="<%= post.link%>"><%= post.link%></a>
-          </p>
+          <div class="post-content">
+            <p style="font-size: 14px" class="post-body  max-width flow-text">
+              <a href="<%= post.link%>"><%= post.link%></a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
